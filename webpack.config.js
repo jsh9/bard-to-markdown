@@ -2,7 +2,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   entry: {
-    "minimizedChatGptToMarkdown": "./src/chatGptToMarkdown.js"
+    "minimizedBardToMarkdown": "./src/bardToMarkdown.js"
   },
   output: {
     filename: '[name].js',
