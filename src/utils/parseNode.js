@@ -14,15 +14,12 @@ THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR I
 */
 
 const replaceString = require('./replaceString');
-const getHorizontalRules = require('./getHorizontalRules');
 const blockQuoteUtils = require('./blockQuoteUtils');
 
 function parseNode(node, level) {
   var nodeMarkdown = '';
 
   if (node.nodeType === Node.TEXT_NODE) {
-    nodeMarkdown += getHorizontalRules();
-    nodeMarkdown += `## Question\n\n`;
     nodeMarkdown += node.textContent;
     nodeMarkdown += '\n\n';
   }
@@ -39,8 +36,8 @@ function parseNode(node, level) {
     } else if (node.tagName === 'UL') {
       nodeMarkdown += parseUnorderedList(node, level);
     } else if (['P', 'LI', 'DIV'].includes(node.tagName)) {
-      for (var j = 0; j < childNodes.length; j++) {
-        const childNode = childNodes[j];
+      for (var i = 0; i < childNodes.length; i++) {
+        const childNode = childNodes[i];
 
         if (childNode.nodeType == Node.TEXT_NODE) {
           nodeMarkdown += childNode.textContent;
@@ -69,6 +66,12 @@ function parseNode(node, level) {
           }
           if (tag === 'CODE') {
             nodeMarkdown += parseInlineCode(childNode);
+          }
+          if (tag === 'DIV') {
+            let tables = node.querySelectorAll('table');
+            for (var j = 0; j < tables.length; j++) {
+              nodeMarkdown += parseTable(tables[j], level);
+            }
           }
 
           if (!['CODE', 'STRONG', 'EM', 'DEL'].includes(tag)) {
@@ -173,7 +176,9 @@ function parseInlineCode(node) {
 
 function parseTable(node) {
   let tableMarkdown = '\n';
-  node.childNodes.forEach((tableSectionNode) => {
+
+  for (var i = 0; i < node.childNodes.length; i++) {
+    tableSectionNode = node.childNodes[i];
     if (
       tableSectionNode.nodeType === Node.ELEMENT_NODE &&
       (tableSectionNode.tagName === 'THEAD' ||
@@ -181,8 +186,9 @@ function parseTable(node) {
     ) {
       // Get table rows
       let tableRows = '';
-      let tableColCount = 0;
-      tableSectionNode.childNodes.forEach((tableRowNode) => {
+
+      for (var j = 0; j < tableSectionNode.childNodes.length; j++) {
+        tableRowNode = tableSectionNode.childNodes[j]
         if (
           tableRowNode.nodeType === Node.ELEMENT_NODE &&
           tableRowNode.tagName === 'TR'
@@ -190,31 +196,33 @@ function parseTable(node) {
           // Get table cells
           let tableCells = '';
 
-          tableRowNode.childNodes.forEach((tableCellNode) => {
+          for (var k = 0; k < tableRowNode.childNodes.length; k++) {
+            tableCellNode = tableRowNode.childNodes[k];
+
             if (
               tableCellNode.nodeType === Node.ELEMENT_NODE &&
               (tableCellNode.tagName === 'TD' || tableCellNode.tagName === 'TH')
             ) {
               tableCells += `| ${replaceString(tableCellNode.outerHTML)} `;
-              if (tableSectionNode.tagName === 'THEAD') {
-                tableColCount++;
-              }
             }
-          });
+          }
+
           tableRows += `${tableCells}|\n`;
+
+          if (j === 0) {
+            headerRowDivider = '|';
+            for (var k = 0; k < tableRowNode.childNodes.length; k++) {
+              headerRowDivider += '---|';
+            }
+            headerRowDivider += '\n';
+            tableRows += headerRowDivider;
+          }
         }
-      });
+      }
 
       tableMarkdown += tableRows;
-
-      if (tableSectionNode.tagName === 'THEAD') {
-        const headerRowDivider = `| ${Array(tableColCount)
-          .fill('---')
-          .join(' | ')} |\n`;
-        tableMarkdown += headerRowDivider;
-      }
     }
-  });
+  }
 
   return tableMarkdown;
 }

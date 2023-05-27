@@ -1,15 +1,9 @@
-const getHorizontalRules = require('./getHorizontalRules');
-
 function cleanUpString(inputString) {
   return trimEachLine(
     trimAndAddTrailingNewline(
-      consolidateEmptyLines(removeLeadingHorizontalRule(inputString)),
+      consolidateEmptyLines(inputString),
     ),
   );
-}
-
-function removeLeadingHorizontalRule(inputString) {
-  return inputString.substring(getHorizontalRules().length);
 }
 
 function consolidateEmptyLines(inputString) {
