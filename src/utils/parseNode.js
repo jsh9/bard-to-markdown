@@ -68,9 +68,16 @@ function parseNode(node, level) {
             nodeMarkdown += parseInlineCode(childNode);
           }
           if (tag === 'DIV') {
-            let tables = node.querySelectorAll('table');
-            for (var j = 0; j < tables.length; j++) {
+            let tables = childNode.querySelectorAll('table');
+            for (let j = 0; j < tables.length; j++) {
               nodeMarkdown += parseTable(tables[j], level);
+            }
+          }
+          if (tag === 'CODE-BLOCK') {
+            let codeBlocks = childNode.querySelectorAll('pre');
+            console.log(codeBlocks);
+            for (let j = 0; j < codeBlocks.length; j++) {
+              nodeMarkdown += parseCodeBlock(codeBlocks[j], level);
             }
           }
 
@@ -163,11 +170,9 @@ function parseUnorderedList(node, level) {
 }
 
 function parseCodeBlock(node) {
-  const splitContents = node.textContent.split('Copy code');
-  const language = splitContents[0].trim();
-  const code = splitContents[1].trim();
-
-  return `\`\`\`${language}\n${code}\n\`\`\`\n`;
+  console.log(node.textContent);
+  const code = node.textContent.trim();
+  return `\`\`\`\n${code}\n\`\`\`\n`;
 }
 
 function parseInlineCode(node) {
