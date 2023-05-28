@@ -162,7 +162,7 @@ function parseUnorderedList(node, level) {
       unorderedListMarkdown += `${spaces}- ${parseNode(
         listItemNode,
         level + 1,
-      )}\n`;
+      ).trimStart()}\n`;
     }
   }
 

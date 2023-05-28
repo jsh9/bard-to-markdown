@@ -13,6 +13,7 @@ global.Node = {
 test.each([
   ['code_block.html', 'code_block.md'],
   ['table.html', 'table.md'],
+  ['nested_bullet_points.html', 'nested_bullet_points.md'],
 ])('%s => %s', (htmlFileName, mdFileName) => {
   const inputHtml = fs.readFileSync(testCaseDir + htmlFileName, encoding);
   const dom = new JSDOM(inputHtml);
