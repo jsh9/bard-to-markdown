@@ -1,8 +1,6 @@
 function cleanUpString(inputString) {
   return trimEachLine(
-    trimAndAddTrailingNewline(
-      consolidateEmptyLines(inputString),
-    ),
+    trimAndAddTrailingNewline(consolidateEmptyLines(inputString)),
   );
 }
 

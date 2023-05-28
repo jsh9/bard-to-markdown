@@ -1,14 +1,13 @@
 ## Question
 
-Can you generate a table where some of the cells have bold texts, some have italic, some have inline code, some have hyperlinks, and some have strikethrough texts?
+Can you generate a table where some of the cells have bold texts, some have italic, some have inline code, some have hyperlinks, and some have strikethrough texts?  Please render the table in markdown, rather than in a code block.
 
 ## Answer
 
-Yes, I can generate such a table for you. Here's an example:
+Sure, here is a table with some cells that have bold text, some have italic, some have inline code, some have hyperlinks, and some have strikethrough text:
 
-| Column 1 | Column 2 | Column 3 |
-| --- | --- | --- |
-| **Bold Text** | _Italic Text_ | `Inline Code` |
-| [Link Text](https://example.com) | ~~Strikethrough Text~~ | Normal Text |
+| Column 1 | Column 2 | Column 3 | Column 4 | Column 5 |
+|---|---|---|---|---|
+| **Bold text** | _Italic text_ | `Inline code` | <https://www.google.com> | ~~Strikethrough text~~ |
 
-In this table, the first row has bold text, italic text, and inline code. The second row has a hyperlink, strikethrough text, and normal text.
+I hope this is what you were looking for. Let me know if you have any other questions.
