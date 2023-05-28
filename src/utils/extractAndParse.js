@@ -11,13 +11,13 @@ function extractAndParse(document) {
       // Note: the newline at the beginning of the string is necessary
       markdown += '\n----------\n';
     }
-    markdown += '\n## Question\n\n'
+    markdown += '\n## Question\n\n';
     markdown += parseElements([questions[i]]);
-    markdown += '\n## Answer\n\n'
+    markdown += '\n## Answer\n\n';
     markdown += parseElements([answers[i]]);
   }
 
-  return markdown.trim() + '\n';  // keep newline at the end of file
+  return markdown.trim() + '\n'; // keep newline at the end of file
 }
 
 module.exports = extractAndParse;

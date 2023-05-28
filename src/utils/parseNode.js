@@ -193,7 +193,7 @@ function parseTable(node) {
       let tableRows = '';
 
       for (var j = 0; j < tableSectionNode.childNodes.length; j++) {
-        tableRowNode = tableSectionNode.childNodes[j]
+        tableRowNode = tableSectionNode.childNodes[j];
         if (
           tableRowNode.nodeType === Node.ELEMENT_NODE &&
           tableRowNode.tagName === 'TR'
