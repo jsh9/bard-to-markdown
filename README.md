@@ -78,4 +78,4 @@ The pipeline automatically checks for the following:
 - The core code is adapted from code files in https://github.com/ryanschiang/chatgpt-export
   + The original license is included on the top of the files, if they are partially or fully from the original repository
 - ChatGPT helped draw the icon of this extension
-  + The folder [icon_drawing_scripts](./icon_drawing_scripts/) contains the chat transcript, the Python script for drawing the icon, and all draft icons
+  + The folder [icon_drawing_scripts](./icon_drawing_scripts/) contains the the Python script that ChatGPT generated for drawing the icon, as well as the icon file
